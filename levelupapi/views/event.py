@@ -31,11 +31,6 @@ class EventView(ViewSet):
         return Response(serializer.data)
     
     def create(self, request):
-        """Handle POST operations
-
-        Returns
-            Response -- JSON serialized game instance
-        """
         gamer = Gamer.objects.get(uid=request.data["userId"])
         game = Game.objects.get(pk=request.data["game"])
 
@@ -46,7 +41,7 @@ class EventView(ViewSet):
             game=game,
             organizer=gamer,
         )
-        serializer = EventSerializer(game)
+        serializer = EventSerializer(event)
         return Response(serializer.data)
     
     def update(self, request, pk):
